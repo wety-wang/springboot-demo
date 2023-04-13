@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+logging:
+  config: classpath:log4j.xml
+
+spring:
+  cache:
+    type: caffeine
+    cache-names: userInfo
+    caffeine:
+      # 缓存最大条数, 缓存失效时间
+      spec: maximumSize=20,expireAfterAccess=10s

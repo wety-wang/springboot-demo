@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="5">
+	<!-- https://www.cnblogs.com/keeya/p/10101547.html -->
+	<Properties>
+		<!-- 2020-02-04 17:16:38,102 [http-nio-8083-exec-1] INFO  xxx.xxx.xxx.xxx:18 - Someone requested url: /hello -->
+		<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%thread] %-5level %logger:%L - %msg%n"/>
+	</Properties>
+
+	<appenders>
+		<!-- log to Console -->
+		<console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOG_PATTERN}"/>
+			<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+		</console>
+
+		<!-- log debug message to  RollingFile-->
+		<RollingFile name="RollingFile" fileName="./logs/info.log" filePattern="./logs/info-%i.log">
+			<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="${LOG_PATTERN}"/>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="1024MB"/>
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+
+		<!-- log error debug message to  RollingFileError-->
+		<RollingFile name="RollingFileError" fileName="./logs/error.log" filePattern="./logs/error-%i.log">
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="${LOG_PATTERN}"/>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="1024MB"/>
+			</Policies>
+			<DefaultRolloverStrategy max="10"/>
+		</RollingFile>
+
+	</appenders>
+
+	<loggers>
+		<root level="info">
+			<appender-ref ref="Console"/>
+			<appender-ref ref="RollingFile"/>
+			<appender-ref ref="RollingFileError"/>
+		</root>
+	</loggers>
+
+</configuration>
