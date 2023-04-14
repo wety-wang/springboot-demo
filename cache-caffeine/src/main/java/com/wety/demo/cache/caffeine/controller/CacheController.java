@@ -17,8 +17,20 @@ public class CacheController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/saveUser")
+    public String saveUser(@RequestParam String userId) {
+        userService.saveUser(userId);
+        return "保存成功";
+    }
+
     @GetMapping("/getUserInfo")
     public String getUserInfo(@RequestParam String userId) {
         return userService.getUserInfo(userId);
+    }
+
+    @GetMapping("/deleteUser")
+    public String deleteUser(@RequestParam String userId) {
+        userService.deleteUser(userId);
+        return "修改成功";
     }
 }

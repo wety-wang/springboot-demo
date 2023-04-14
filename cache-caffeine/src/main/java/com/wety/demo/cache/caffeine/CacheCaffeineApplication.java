@@ -7,8 +7,9 @@ import org.springframework.cache.annotation.EnableCaching;
 /**
  * @author wety
  */
-@EnableCaching
 @SpringBootApplication
+// 开启缓存
+@EnableCaching
 public class CacheCaffeineApplication {
 
     public static void main(String[] args) {
