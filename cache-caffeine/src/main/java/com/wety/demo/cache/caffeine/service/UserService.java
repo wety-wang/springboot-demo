@@ -39,6 +39,7 @@ public class UserService {
      * key：缓存数据时使用的key，可以用它来指定。<br>
      * <p>
      * 常用于查询方法
+     * <p><strong>注意：如果是一个方法A调同一个类里的另一个有缓存注解的方法B，这样是不走缓存的。</strong></p>
      */
     @Cacheable(condition = "#userId != '123'", unless = "#result == null || #result == ''", key = "#userId")
     public String getUserInfo(String userId) {
